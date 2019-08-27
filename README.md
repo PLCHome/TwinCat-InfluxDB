@@ -29,31 +29,38 @@ You need a license of the TwinCAT TCP/IP [librarie](https://infosys.beckhoff.com
 # FUNCTION_BLOCK
 ### FB_InfluxDB_Fifo
 You need an instance so the communication can work.
+``` 
 VAR_INPUT
   in          : string argument for the action push.
 VAR_OUTPUT
   Data        : a string is stotred in the buffer
   out         : the output for pop
   error       : an error has occurred
+``` 
 
 ![FB_InfluxDB_Fifo](resource/FB_InfluxDB_Fifo.jpg)
 
 ### FB_InfluxDB_Fifo.push
 Inserts a new string into the buffer.
+``` 
 VAR_INPUT
   in          : string to append.
+``` 
 
 ![FB_InfluxDB_Fifo_action](resource/FB_InfluxDB_Fifo_action.jpg)
 
 ### FB_InfluxDB_Fifo.pop
 Put the first added string in the var out.
+``` 
 VAR_OUTPUT
   out         : the output for pop
+``` 
 
 ![FB_InfluxDB_Fifo_action](resource/FB_InfluxDB_Fifo_action.jpg)
 
 ## FB_InfluxDB_StoreData
 Builds a string to insert data into the InfluxDB and paste it into the FIFO.
+``` 
 VAR_INPUT
   i_sMeasurement: The name for the measurement.
   i_sSource: The name for the source, it can be empty if you have an explicit measurement.
@@ -67,11 +74,13 @@ VAR_OUTPUT
 END_VAR
 VAR_IN_OUT
   io_fbInfluxDB_Fifo  : a instance if FB_InfluxDB_Fifo
+``` 
 
 ![FB_InfluxDB_StoreData](resource/FB_InfluxDB_StoreData.jpg)
 
 ## FB_InfluxDB
 Must be called every cycle. Sends the data to the database.
+``` 
 VAR_OUTPUT
   o_bBusi         : FB_InfluxDB is working or (false) idle
   o_bError        : An error occurred
@@ -80,12 +89,14 @@ END_VAR
 VAR_IN_OUT
   io_stInfluxDB_ConPar  : a instance if ST_InfluxDB_ConPar
   io_fbInfluxDB_Fifo    : a instance if FB_InfluxDB_Fifo
+``` 
 
 ![FB_InfluxDB](resource/FB_InfluxDB.jpg)
 
 
 # TYPE
 ### ST_InfluxDB_ConPar
+``` 
 STRUCT
   sIpv4Address  : ipadress of the InfluxDB can be empty when the host name is given
   uPort         : port of the InfluxDB
@@ -93,6 +104,7 @@ STRUCT
   sDatabase     : name of the database mus exists in the InfluxDB.
   sUser         : user, can be empty.
   sPassword     : password, can be empty.
+``` 
 
 
 
